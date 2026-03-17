@@ -1,91 +1,89 @@
-AI Document Assistant – Production Ready
+# AI Document Assistant – Production Ready
 
-🔹 Описание проекта
+## Project Description
 
-AI Document Assistant — это продакшен-подобный AI-помощник для поиска информации в документах и ответов на вопросы с использованием LLM.
+AI Document Assistant is a production-ready AI helper for searching information in documents and answering questions using LLM.
 
-Проект демонстрирует:
+The project demonstrates:
 
-Интеграцию LLM (GPT-4 / OpenAI API) для генерации ответов.
+- LLM integration (GPT-4 / OpenAI API) for answer generation
+- Vector document search via FAISS
+- Chain orchestration (LangChain-like) and graph visualization of processing (LangGraph)
+- FastAPI for frontend or other service integration
+- Cloud deployment readiness (Docker + AWS / Azure)
 
-Векторный поиск документов через FAISS.
+## Features
 
-Оркестрацию цепочек (аналог LangChain) и графовую визуализацию обработки (LangGraph).
+- Document upload (.txt) via API
+- Document indexing and vector store creation
+- Relevant document search by user query
+- Answer generation with LLM
+- Processing chain visualization (LangGraph-like)
 
-API на FastAPI для взаимодействия с фронтендом или другими сервисами.
+## Tech Stack
 
-Готовность к облачному деплою (Docker + AWS / Azure).
+- Python 3.11, FastAPI
+- OpenAI GPT / LLaMA / MPT
+- LangChain + LangGraph (networkx)
+- FAISS for vector search
+- Docker for production packaging
+- Cloud services: AWS SageMaker, Azure OpenAI, S3 / Blob Storage
 
-🔹 Функционал
+## Project Structure
 
-Загрузка документов (.txt) через API.
-
-Индексация документов и создание векторного хранилища.
-
-Поиск релевантных документов по запросу пользователя.
-
-Генерация ответа с помощью LLM.
-
-Визуализация цепочки обработки (LangGraph-подобно).
-
-🔹 Технологии
-
-Python 3.11, FastAPI
-
-OpenAI GPT / LLaMA / MPT
-
-LangChain + LangGraph (networkx)
-
-FAISS для векторного поиска
-
-Docker для продакшен-упаковки
-
-Облачные сервисы: AWS SageMaker, Azure OpenAI, S3 / Blob Storage
-
-🔹 Структура проекта
+```
 ai_doc_assistant/
-├─ app/
-│  ├─ main.py          # FastAPI приложение
-│  ├─ embeddings.py    # векторизация документов
-│  ├─ qa_chain.py      # цепочка поиска + LLM
-│  ├─ graph.py         # визуализация цепочки
-│  └─ utils.py         # работа с файлами
-├─ docs/               # текстовые документы
-├─ requirements.txt
-├─ Dockerfile
-└─ README.md
-🔹 Быстрый старт
+├── app/
+│   ├── main.py          # FastAPI application
+│   ├── embeddings.py    # document vectorization
+│   ├── qa_chain.py      # search + LLM chain
+│   ├── graph.py         # chain visualization
+│   └── utils.py         # file handling
+├── docs/                # text documents
+├── requirements.txt
+├── Dockerfile
+└── README.md
+```
 
-Установить зависимости:
+## Quick Start
 
+Install dependencies:
+
+```bash
 pip install -r requirements.txt
+```
 
-Запустить локально:
+Run locally:
 
+```bash
 uvicorn app.main:app --reload
+```
 
-Через Docker:
+Via Docker:
 
+```bash
 docker build -t ai_doc_assistant .
 docker run -p 8000:8000 ai_doc_assistant
+```
 
-API:
+### API
 
-Загрузка файла:
+**Upload file:**
 
+```
 POST http://localhost:8000/upload
+```
 
-Задать вопрос:
+**Ask a question:**
 
-GET http://localhost:8000/ask?question=Где находится заказ #1234?
-🔹 Облачное развёртывание
+```
+GET http://localhost:8000/ask?question=Where is order #1234?
+```
 
-Создать endpoint модели в AWS SageMaker / Azure OpenAI Service.
+## Cloud Deployment
 
-Обновить qa_chain.py, указав облачный endpoint.
-
-Упаковать Docker-контейнер → загрузить в AWS ECR / Azure ACR.
-
-Развернуть через ECS / App Service / Kubernetes.
-
-Подключить S3 / Blob Storage для постоянного хранения документов.
+1. Create model endpoint in AWS SageMaker / Azure OpenAI Service
+2. Update `qa_chain.py` with the cloud endpoint
+3. Build Docker image → push to AWS ECR / Azure ACR
+4. Deploy via ECS / App Service / Kubernetes
+5. Connect S3 / Blob Storage for persistent document storage
